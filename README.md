@@ -1,5 +1,5 @@
 # .NET Performance Benchmarks
-This repository contains benchmarks for various situations
+This repository contains benchmarks for various situations we usually meet when developing libraries or business features
 
 # List capacity
 
