@@ -1,2 +1,2 @@
-# .NET-Performance-Benchmarks
-This repository contains benchmarks for varios situations
+# .NET Performance Benchmarks
+This repository contains benchmarks for various situations
