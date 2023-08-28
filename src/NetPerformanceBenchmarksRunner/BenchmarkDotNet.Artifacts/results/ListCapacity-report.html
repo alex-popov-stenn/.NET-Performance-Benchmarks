@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>ListCapacity-20230828-230339</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.13.7, Windows 11 (10.0.22621.2134/22H2/2022Update/SunValley2)
+AMD Ryzen 7 5700U with Radeon Graphics, 1 CPU, 16 logical and 8 physical cores
+.NET SDK 7.0.202
+  [Host]   : .NET 7.0.4 (7.0.423.11508), X64 RyuJIT AVX2
+  .NET 7.0 : .NET 7.0.4 (7.0.423.11508), X64 RyuJIT AVX2
+</code></pre>
+<pre><code>Job=.NET 7.0  Runtime=.NET 7.0  
+</code></pre>
+
+<table>
+<thead><tr><th>                       Method</th><th>Records</th><th>     Mean</th><th>  Error</th><th>  StdDev</th>
+</tr>
+</thead><tbody><tr><td>AddToListWithoutInitializedCapacity</td><td>5</td><td>30.28 ns</td><td>0.073 ns</td><td>0.061 ns</td>
+</tr><tr><td>AddToListWithInitializedCapacity</td><td>5</td><td>14.77 ns</td><td>0.055 ns</td><td>0.043 ns</td>
+</tr><tr><td>AddToListWithoutInitializedCapacity</td><td>100</td><td>255.01 ns</td><td>5.076 ns</td><td>5.642 ns</td>
+</tr><tr><td>AddToListWithInitializedCapacity</td><td>100</td><td>207.62 ns</td><td>0.311 ns</td><td>0.243 ns</td>
+</tr><tr><td>AddToListWithoutInitializedCapacity</td><td>500</td><td>1,129.64 ns</td><td>19.372 ns</td><td>25.189 ns</td>
+</tr><tr><td>AddToListWithInitializedCapacity</td><td>500</td><td>900.18 ns</td><td>17.493 ns</td><td>15.507 ns</td>
+</tr><tr><td>AddToListWithoutInitializedCapacity</td><td>1000</td><td>2,013.68 ns</td><td>25.052 ns</td><td>26.806 ns</td>
+</tr><tr><td>AddToListWithInitializedCapacity</td><td>1000</td><td>1,750.14 ns</td><td>8.072 ns</td><td>7.551 ns</td>
+</tr><tr><td>AddToListWithoutInitializedCapacity</td><td>10000</td><td>20,879.05 ns</td><td>210.560 ns</td><td>175.827 ns</td>
+</tr><tr><td>AddToListWithInitializedCapacity</td><td>10000</td><td>17,243.98 ns</td><td>10.600 ns</td><td>9.397 ns</td>
+</tr><tr><td>AddToListWithoutInitializedCapacity</td><td>50000</td><td>236,668.83 ns</td><td>824.248 ns</td><td>771.002 ns</td>
+</tr><tr><td>AddToListWithInitializedCapacity</td><td>50000</td><td>148,223.85 ns</td><td>1,457.529 ns</td><td>1,363.374 ns</td>
+</tr><tr><td>AddToListWithoutInitializedCapacity</td><td>500000</td><td>2,391,102.57 ns</td><td>46,899.070 ns</td><td>89,230.354 ns</td>
+</tr><tr><td>AddToListWithInitializedCapacity</td><td>500000</td><td>1,489,341.31 ns</td><td>11,320.957 ns</td><td>10,035.733 ns</td>
+</tr><tr><td>AddToListWithoutInitializedCapacity</td><td>1000000</td><td>5,037,593.54 ns</td><td>97,038.301 ns</td><td>132,827.122 ns</td>
+</tr><tr><td>AddToListWithInitializedCapacity</td><td>1000000</td><td>3,005,693.33 ns</td><td>35,839.924 ns</td><td>33,524.687 ns</td>
+</tr></tbody></table>
+</body>
+</html>

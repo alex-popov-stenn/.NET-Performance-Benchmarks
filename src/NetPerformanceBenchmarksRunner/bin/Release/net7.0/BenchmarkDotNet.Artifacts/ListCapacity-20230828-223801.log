@@ -1,0 +1,7 @@
+// Validating benchmarks:
+// ***** BenchmarkRunner: Start   *****
+// ***** Found 16 benchmark(s) in total *****
+// ***** Building 1 exe(s) in Parallel: Start   *****
+// start dotnet  restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in C:\Users\aleksey\Documents\STENN\.NET-Performance-Benchmarks\src\NetPerformanceBenchmarksRunner\bin\Release\net7.0\26a2862c-599b-4a47-9d88-0c6cc91848fb
+// command took 2.21 sec and exited with 0
+// start dotnet  build -c Release --no-restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in C:\Users\aleksey\Documents\STENN\.NET-Performance-Benchmarks\src\NetPerformanceBenchmarksRunner\bin\Release\net7.0\26a2862c-599b-4a47-9d88-0c6cc91848fb
