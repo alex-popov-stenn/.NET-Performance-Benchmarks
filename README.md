@@ -133,3 +133,5 @@ Job=.NET 7.0  Runtime=.NET 7.0
 |    HashSetPlannedCapacity | 1000000 |  8,784,909.17 ns | 114,459.078 ns | 107,065.093 ns |  8,782,306.25 ns |
 | DictionaryDynamicCapacity | 1000000 | 21,203,501.04 ns | 414,480.841 ns | 387,705.636 ns | 21,223,450.00 ns |
 | DictionaryPlannedCapacity | 1000000 | 10,092,021.22 ns | 178,453.157 ns | 198,350.211 ns | 10,021,425.00 ns |
+
+*Recommendation*: always specify capacity if you know planned size
