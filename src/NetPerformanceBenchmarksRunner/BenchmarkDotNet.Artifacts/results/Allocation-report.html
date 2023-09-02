@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>Allocation-20230902-133838</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.13.7, Windows 11 (10.0.22621.2134/22H2/2022Update/SunValley2)
+AMD Ryzen 7 5700U with Radeon Graphics, 1 CPU, 16 logical and 8 physical cores
+.NET SDK 7.0.202
+  [Host]   : .NET 7.0.4 (7.0.423.11508), X64 RyuJIT AVX2
+  .NET 7.0 : .NET 7.0.4 (7.0.423.11508), X64 RyuJIT AVX2
+</code></pre>
+<pre><code>Job=.NET 7.0  Runtime=.NET 7.0  
+</code></pre>
+
+<table>
+<thead><tr><th> Method</th><th>Records</th><th>      Mean</th><th>   Error</th><th>  StdDev</th><th>    Median</th><th>Gen0</th><th>Gen1</th><th>Gen2</th><th>Allocated</th>
+</tr>
+</thead><tbody><tr><td>NewList</td><td>5</td><td>7.569 ns</td><td>0.1548 ns</td><td>0.1448 ns</td><td>7.509 ns</td><td>0.0383</td><td>-</td><td>-</td><td>80 B</td>
+</tr><tr><td>NewArray</td><td>5</td><td>2.867 ns</td><td>0.0544 ns</td><td>0.0454 ns</td><td>2.876 ns</td><td>0.0230</td><td>-</td><td>-</td><td>48 B</td>
+</tr><tr><td>NewDictionary</td><td>5</td><td>20.673 ns</td><td>0.1505 ns</td><td>0.1408 ns</td><td>20.721 ns</td><td>0.1301</td><td>-</td><td>-</td><td>272 B</td>
+</tr><tr><td>NewHashSet</td><td>5</td><td>17.872 ns</td><td>0.1084 ns</td><td>0.0846 ns</td><td>17.857 ns</td><td>0.1109</td><td>-</td><td>-</td><td>232 B</td>
+</tr><tr><td>NewEnumerable</td><td>5</td><td>5.268 ns</td><td>0.0283 ns</td><td>0.0251 ns</td><td>5.270 ns</td><td>0.0191</td><td>-</td><td>-</td><td>40 B</td>
+</tr><tr><td>NewList</td><td>100</td><td>18.963 ns</td><td>0.0338 ns</td><td>0.0316 ns</td><td>18.965 ns</td><td>0.2180</td><td>-</td><td>-</td><td>456 B</td>
+</tr><tr><td>NewArray</td><td>100</td><td>13.703 ns</td><td>0.0663 ns</td><td>0.0518 ns</td><td>13.693 ns</td><td>0.2027</td><td>-</td><td>-</td><td>424 B</td>
+</tr><tr><td>NewDictionary</td><td>100</td><td>82.503 ns</td><td>0.7354 ns</td><td>0.6141 ns</td><td>82.325 ns</td><td>1.0858</td><td>-</td><td>-</td><td>2272 B</td>
+</tr><tr><td>NewHashSet</td><td>100</td><td>76.037 ns</td><td>0.2525 ns</td><td>0.2109 ns</td><td>76.037 ns</td><td>0.8756</td><td>-</td><td>-</td><td>1832 B</td>
+</tr><tr><td>NewEnumerable</td><td>100</td><td>5.152 ns</td><td>0.0721 ns</td><td>0.0709 ns</td><td>5.136 ns</td><td>0.0191</td><td>-</td><td>-</td><td>40 B</td>
+</tr><tr><td>NewList</td><td>500</td><td>65.144 ns</td><td>0.8997 ns</td><td>0.7024 ns</td><td>64.975 ns</td><td>0.9823</td><td>-</td><td>-</td><td>2056 B</td>
+</tr><tr><td>NewArray</td><td>500</td><td>56.698 ns</td><td>0.0663 ns</td><td>0.0588 ns</td><td>56.675 ns</td><td>0.9671</td><td>-</td><td>-</td><td>2024 B</td>
+</tr><tr><td>NewDictionary</td><td>500</td><td>327.046 ns</td><td>5.7616 ns</td><td>7.2866 ns</td><td>323.929 ns</td><td>5.0378</td><td>-</td><td>-</td><td>10552 B</td>
+</tr><tr><td>NewHashSet</td><td>500</td><td>268.156 ns</td><td>1.7987 ns</td><td>1.5020 ns</td><td>268.175 ns</td><td>4.0321</td><td>-</td><td>-</td><td>8456 B</td>
+</tr><tr><td>NewEnumerable</td><td>500</td><td>5.269 ns</td><td>0.0252 ns</td><td>0.0197 ns</td><td>5.270 ns</td><td>0.0191</td><td>-</td><td>-</td><td>40 B</td>
+</tr><tr><td>NewList</td><td>1000</td><td>134.645 ns</td><td>4.1141 ns</td><td>12.0011 ns</td><td>133.070 ns</td><td>1.9379</td><td>-</td><td>-</td><td>4056 B</td>
+</tr><tr><td>NewArray</td><td>1000</td><td>117.319 ns</td><td>2.2918 ns</td><td>3.7654 ns</td><td>118.688 ns</td><td>1.9228</td><td>-</td><td>-</td><td>4024 B</td>
+</tr><tr><td>NewDictionary</td><td>1000</td><td>679.764 ns</td><td>24.7701 ns</td><td>69.4581 ns</td><td>660.735 ns</td><td>10.5257</td><td>-</td><td>-</td><td>22192 B</td>
+</tr><tr><td>NewHashSet</td><td>1000</td><td>568.598 ns</td><td>18.2943 ns</td><td>53.0751 ns</td><td>548.425 ns</td><td>8.4743</td><td>-</td><td>-</td><td>17768 B</td>
+</tr><tr><td>NewEnumerable</td><td>1000</td><td>7.239 ns</td><td>0.4350 ns</td><td>1.2825 ns</td><td>7.734 ns</td><td>0.0191</td><td>-</td><td>-</td><td>40 B</td>
+</tr><tr><td>NewList</td><td>10000</td><td>1,172.403 ns</td><td>35.9203 ns</td><td>104.7812 ns</td><td>1,167.119 ns</td><td>18.8675</td><td>-</td><td>-</td><td>40056 B</td>
+</tr><tr><td>NewArray</td><td>10000</td><td>970.245 ns</td><td>19.4235 ns</td><td>44.2372 ns</td><td>958.123 ns</td><td>18.8675</td><td>-</td><td>-</td><td>40024 B</td>
+</tr><tr><td>NewDictionary</td><td>10000</td><td>9,824.735 ns</td><td>212.0709 ns</td><td>605.0503 ns</td><td>9,664.417 ns</td><td>49.9878</td><td>49.9878</td><td>49.9878</td><td>202209 B</td>
+</tr><tr><td>NewHashSet</td><td>10000</td><td>8,718.205 ns</td><td>245.3007 ns</td><td>711.6619 ns</td><td>8,556.238 ns</td><td>38.4521</td><td>38.4521</td><td>38.4521</td><td>161781 B</td>
+</tr><tr><td>NewEnumerable</td><td>10000</td><td>5.687 ns</td><td>0.1716 ns</td><td>0.4897 ns</td><td>5.559 ns</td><td>0.0191</td><td>-</td><td>-</td><td>40 B</td>
+</tr><tr><td>NewList</td><td>50000</td><td>6,956.950 ns</td><td>137.4558 ns</td><td>205.7374 ns</td><td>6,960.099 ns</td><td>62.4924</td><td>62.4924</td><td>62.4924</td><td>200076 B</td>
+</tr><tr><td>NewArray</td><td>50000</td><td>7,026.850 ns</td><td>140.4490 ns</td><td>299.3082 ns</td><td>6,976.780 ns</td><td>62.4924</td><td>62.4924</td><td>62.4924</td><td>200044 B</td>
+</tr><tr><td>NewDictionary</td><td>50000</td><td>207,767.931 ns</td><td>4,777.6618 ns</td><td>14,087.0435 ns</td><td>208,657.678 ns</td><td>285.6445</td><td>285.6445</td><td>285.6445</td><td>1047445 B</td>
+</tr><tr><td>NewHashSet</td><td>50000</td><td>26,474.433 ns</td><td>465.1552 ns</td><td>710.3411 ns</td><td>26,431.931 ns</td><td>249.9695</td><td>249.9695</td><td>249.9695</td><td>837976 B</td>
+</tr><tr><td>NewEnumerable</td><td>50000</td><td>5.530 ns</td><td>0.1450 ns</td><td>0.2759 ns</td><td>5.459 ns</td><td>0.0191</td><td>-</td><td>-</td><td>40 B</td>
+</tr><tr><td>NewList</td><td>500000</td><td>41,304.410 ns</td><td>151.9788 ns</td><td>118.6550 ns</td><td>41,297.043 ns</td><td>499.9390</td><td>499.9390</td><td>499.9390</td><td>2000218 B</td>
+</tr><tr><td>NewArray</td><td>500000</td><td>48,600.851 ns</td><td>964.0528 ns</td><td>2,606.3727 ns</td><td>48,820.947 ns</td><td>499.9390</td><td>499.9390</td><td>499.9390</td><td>2000151 B</td>
+</tr><tr><td>NewDictionary</td><td>500000</td><td>1,449,880.163 ns</td><td>30,110.3898 ns</td><td>87,355.7007 ns</td><td>1,437,187.891 ns</td><td>378.9063</td><td>378.9063</td><td>378.9063</td><td>11215240 B</td>
+</tr><tr><td>NewHashSet</td><td>500000</td><td>1,134,630.679 ns</td><td>22,635.7406 ns</td><td>62,723.5307 ns</td><td>1,126,885.938 ns</td><td>351.5625</td><td>349.6094</td><td>349.6094</td><td>8972027 B</td>
+</tr><tr><td>NewEnumerable</td><td>500000</td><td>5.224 ns</td><td>0.0223 ns</td><td>0.0198 ns</td><td>5.223 ns</td><td>0.0191</td><td>-</td><td>-</td><td>40 B</td>
+</tr><tr><td>NewList</td><td>1000000</td><td>78,618.241 ns</td><td>400.7121 ns</td><td>374.8264 ns</td><td>78,702.222 ns</td><td>999.8779</td><td>999.8779</td><td>999.8779</td><td>4000391 B</td>
+</tr><tr><td>NewArray</td><td>1000000</td><td>77,895.227 ns</td><td>966.9746 ns</td><td>807.4676 ns</td><td>77,872.693 ns</td><td>999.8779</td><td>999.8779</td><td>999.8779</td><td>4000352 B</td>
+</tr><tr><td>NewDictionary</td><td>1000000</td><td>1,936,888.525 ns</td><td>33,619.0190 ns</td><td>33,018.3719 ns</td><td>1,939,648.926 ns</td><td>630.8594</td><td>626.9531</td><td>626.9531</td><td>23256936 B</td>
+</tr><tr><td>NewHashSet</td><td>1000000</td><td>1,601,207.063 ns</td><td>31,293.9806 ns</td><td>58,005.3996 ns</td><td>1,584,240.625 ns</td><td>500.0000</td><td>498.0469</td><td>498.0469</td><td>18604465 B</td>
+</tr><tr><td>NewEnumerable</td><td>1000000</td><td>6.982 ns</td><td>0.3755 ns</td><td>1.1072 ns</td><td>6.772 ns</td><td>0.0191</td><td>-</td><td>-</td><td>40 B</td>
+</tr></tbody></table>
+</body>
+</html>

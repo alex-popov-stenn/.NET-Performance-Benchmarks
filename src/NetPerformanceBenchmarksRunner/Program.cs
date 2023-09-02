@@ -2,4 +2,5 @@
 
 using BenchmarkDotNet.Running;
 
-BenchmarkRunner.Run<Capacity>();
+BenchmarkRunner.Run<Iterating>();
+BenchmarkRunner.Run<Allocation>();
