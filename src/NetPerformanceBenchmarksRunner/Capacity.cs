@@ -8,77 +8,69 @@ public class Capacity
     [Params(5, 100, 500, 1000, 10000, 50000, 500000, 1000000)]
     public int Records;
 
-
-    private List<int> listWithCapacity;
-    private List<int> listWithoutCapacity;
-    private Dictionary<int, int> dictionaryWithCapacity;
-    private Dictionary<int, int> dictionaryWithoutCapacity;
-    private HashSet<int> hashSetWithCapacity;
-    private HashSet<int> hashSetWithoutCapacity;
-
-    [GlobalSetup]
-    public void Setup()
-    {
-        listWithCapacity = new List<int>(Records);
-        listWithoutCapacity = new List<int>();
-        dictionaryWithCapacity = new Dictionary<int, int>(Records);
-        dictionaryWithoutCapacity = new Dictionary<int, int>();
-        hashSetWithCapacity = new HashSet<int>(Records);
-        hashSetWithoutCapacity = new HashSet<int>();
-    }
-
     [Benchmark]
     public void ListDynamicCapacity()
     {
+        var list = new List<int>();
+
         for (int i = 0; i < Records; i++)
         {
-            listWithoutCapacity.Add(i);
+            list.Add(i);
         }
     }
 
     [Benchmark]
     public void ListPlannedCapacity()
     {
+        var list = new List<int>(Records);
+
         for (int i = 0; i < Records; i++)
         {
-            listWithCapacity.Add(i);
+            list.Add(i);
         }
     }
 
     [Benchmark]
     public void HashSetDynamicCapacity()
     {
+        var hashSet = new HashSet<int>();
+
         for (int i = 0; i < Records; i++)
         {
-            hashSetWithoutCapacity.Add(i);
+            hashSet.Add(i);
         }
     }
 
     [Benchmark]
     public void HashSetPlannedCapacity()
     {
+        var hashSet = new HashSet<int>(Records);
+
         for (int i = 0; i < Records; i++)
         {
-            hashSetWithCapacity.Add(i);
+            hashSet.Add(i);
         }
     }
-
 
     [Benchmark]
     public void DictionaryDynamicCapacity()
     {
+        var dictionary = new Dictionary<int, int>();
+
         for (int i = 0; i < Records; i++)
         {
-            dictionaryWithoutCapacity.Add(i, i);
+            dictionary.Add(i, i);
         }
     }
 
     [Benchmark]
     public void DictionaryPlannedCapacity()
     {
+        var dictionary = new Dictionary<int, int>(Records);
+
         for (int i = 0; i < Records; i++)
         {
-            dictionaryWithCapacity.Add(i, i);
+            dictionary.Add(i, i);
         }
     }
 }
