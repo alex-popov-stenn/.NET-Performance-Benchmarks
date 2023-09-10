@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>StringConcatenationMixTypes-20230910-130839</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.13.7, Windows 11 (10.0.22621.2134/22H2/2022Update/SunValley2)
+AMD Ryzen 7 5700U with Radeon Graphics, 1 CPU, 16 logical and 8 physical cores
+.NET SDK 7.0.202
+  [Host]   : .NET 7.0.4 (7.0.423.11508), X64 RyuJIT AVX2
+  .NET 7.0 : .NET 7.0.4 (7.0.423.11508), X64 RyuJIT AVX2
+</code></pre>
+<pre><code>Job=.NET 7.0  Runtime=.NET 7.0  
+</code></pre>
+
+<table>
+<thead><tr><th>                    Method</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Gen0</th><th>Allocated</th>
+</tr>
+</thead><tbody><tr><td>StringFormat</td><td>79.34 ns</td><td>1.002 ns</td><td>0.783 ns</td><td>0.0573</td><td>120 B</td>
+</tr><tr><td>StringInterpolation</td><td>54.01 ns</td><td>0.922 ns</td><td>0.906 ns</td><td>0.0459</td><td>96 B</td>
+</tr><tr><td>StringConcat</td><td>51.08 ns</td><td>0.208 ns</td><td>0.173 ns</td><td>0.0918</td><td>192 B</td>
+</tr><tr><td>StringJoin</td><td>74.55 ns</td><td>0.593 ns</td><td>0.526 ns</td><td>0.1032</td><td>216 B</td>
+</tr><tr><td>StringBuilder</td><td>84.85 ns</td><td>0.311 ns</td><td>0.305 ns</td><td>0.2104</td><td>440 B</td>
+</tr><tr><td>DefaultInterpolatedStringHandler</td><td>50.56 ns</td><td>0.431 ns</td><td>0.360 ns</td><td>0.0459</td><td>96 B</td>
+</tr><tr><td>EnumerableAggregate</td><td>150.56 ns</td><td>1.761 ns</td><td>1.648 ns</td><td>0.2716</td><td>568 B</td>
+</tr></tbody></table>
+</body>
+</html>

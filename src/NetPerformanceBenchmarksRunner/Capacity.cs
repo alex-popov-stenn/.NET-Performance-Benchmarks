@@ -3,6 +3,7 @@ using BenchmarkDotNet.Jobs;
 
 [SimpleJob(RuntimeMoniker.Net70)]
 [MarkdownExporterAttribute.GitHub]
+[MemoryDiagnoser]
 public class Capacity
 {
     [Params(5, 100, 500, 1000, 10000, 50000, 500000, 1000000)]

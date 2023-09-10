@@ -412,3 +412,74 @@ Job=.NET 7.0  Runtime=.NET 7.0
 
 *Observations*:
 1. Always use capacity when you know expected collection size
+
+# Concatenation
+
+**Loop statement**
+
+```
+
+BenchmarkDotNet v0.13.7, Windows 11 (10.0.22621.2134/22H2/2022Update/SunValley2)
+AMD Ryzen 7 5700U with Radeon Graphics, 1 CPU, 16 logical and 8 physical cores
+.NET SDK 7.0.202
+  [Host]   : .NET 7.0.4 (7.0.423.11508), X64 RyuJIT AVX2
+  .NET 7.0 : .NET 7.0.4 (7.0.423.11508), X64 RyuJIT AVX2
+
+Job=.NET 7.0  Runtime=.NET 7.0  
+
+```
+|                     Method |       Mean |     Error |    StdDev |    Gen0 | Allocated |
+|--------------------------- |-----------:|----------:|----------:|--------:|----------:|
+|              StringBuilder |   837.6 ns |  16.78 ns |  47.88 ns |  0.6733 |    1408 B |
+|               StringConcat | 2,774.6 ns |  55.47 ns | 106.87 ns | 11.3487 |   23736 B |
+|        StringInterpolation | 6,534.7 ns | 170.19 ns | 491.05 ns | 11.4594 |   23976 B |
+| StringInterpolationHandler |   681.5 ns |  13.69 ns |  33.05 ns |  0.1945 |     408 B |
+
+**Concatenation of mix value and reference types**
+
+```
+
+BenchmarkDotNet v0.13.7, Windows 11 (10.0.22621.2134/22H2/2022Update/SunValley2)
+AMD Ryzen 7 5700U with Radeon Graphics, 1 CPU, 16 logical and 8 physical cores
+.NET SDK 7.0.202
+  [Host]   : .NET 7.0.4 (7.0.423.11508), X64 RyuJIT AVX2
+  .NET 7.0 : .NET 7.0.4 (7.0.423.11508), X64 RyuJIT AVX2
+
+Job=.NET 7.0  Runtime=.NET 7.0  
+
+```
+|                           Method |      Mean |    Error |   StdDev |   Gen0 | Allocated |
+|--------------------------------- |----------:|---------:|---------:|-------:|----------:|
+|                     StringFormat |  79.34 ns | 1.002 ns | 0.783 ns | 0.0573 |     120 B |
+|              StringInterpolation |  54.01 ns | 0.922 ns | 0.906 ns | 0.0459 |      96 B |
+|                     StringConcat |  51.08 ns | 0.208 ns | 0.173 ns | 0.0918 |     192 B |
+|                       StringJoin |  74.55 ns | 0.593 ns | 0.526 ns | 0.1032 |     216 B |
+|                    StringBuilder |  84.85 ns | 0.311 ns | 0.305 ns | 0.2104 |     440 B |
+| DefaultInterpolatedStringHandler |  50.56 ns | 0.431 ns | 0.360 ns | 0.0459 |      96 B |
+|              EnumerableAggregate | 150.56 ns | 1.761 ns | 1.648 ns | 0.2716 |     568 B |
+
+**Concatenation of strings only**
+
+```
+
+BenchmarkDotNet v0.13.7, Windows 11 (10.0.22621.2134/22H2/2022Update/SunValley2)
+AMD Ryzen 7 5700U with Radeon Graphics, 1 CPU, 16 logical and 8 physical cores
+.NET SDK 7.0.202
+  [Host]   : .NET 7.0.4 (7.0.423.11508), X64 RyuJIT AVX2
+  .NET 7.0 : .NET 7.0.4 (7.0.423.11508), X64 RyuJIT AVX2
+
+Job=.NET 7.0  Runtime=.NET 7.0  
+
+```
+|                           Method |      Mean |    Error |   StdDev |    Median |   Gen0 | Allocated |
+|--------------------------------- |----------:|---------:|---------:|----------:|-------:|----------:|
+|                     StringFormat |  80.89 ns | 1.662 ns | 1.847 ns |  79.89 ns | 0.0459 |      96 B |
+|              StringInterpolation |  44.67 ns | 0.319 ns | 0.283 ns |  44.70 ns | 0.0459 |      96 B |
+|                       StringJoin |  48.15 ns | 0.168 ns | 0.141 ns |  48.13 ns | 0.0765 |     160 B |
+|                    StringBuilder |  80.18 ns | 1.538 ns | 3.656 ns |  78.35 ns | 0.2104 |     440 B |
+| DefaultInterpolatedStringHandler |  46.24 ns | 0.931 ns | 1.108 ns |  46.23 ns | 0.0459 |      96 B |
+|              EnumerableAggregate | 135.90 ns | 2.160 ns | 1.686 ns | 135.51 ns | 0.2563 |     536 B |
+
+*Observations*:
+1. With C# 10 and higher, use string interpolation instead of string.Format, it allocates much less extra memory besides the final string
+2. Use DefaultInterpolatedStringHandler or StringBuilder in multiple concatenation statements
